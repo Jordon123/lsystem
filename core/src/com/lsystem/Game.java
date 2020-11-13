@@ -11,20 +11,21 @@ public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	ShapeRenderer sr;
+	FractalTree ft;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		sr = new ShapeRenderer();
+		ft = new FractalTree();
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		sr.begin(ShapeRenderer.ShapeType.Line);
-		sr.line(0, 0, 100, 100);
-		sr.end();
+		String tree = ft.setup(3);
+		ft.draw(tree,sr);
 	}
 	
 	@Override
