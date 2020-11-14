@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 //https://en.wikipedia.org/wiki/L-system
-public class FractalTree {
+public class FractalTree3D {
     /* variables: 0, 1
        constants: [, ]
         axiom: 0
@@ -90,3 +90,4 @@ public class FractalTree {
         sr.end();
     }
 }
+
