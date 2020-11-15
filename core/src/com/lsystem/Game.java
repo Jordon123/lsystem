@@ -22,23 +22,25 @@ public class Game extends ApplicationAdapter {
 	ModelBatch modelBatch;
 	Texture img;
 	ShapeRenderer sr;
-	FractalTree ft;
+	FractalTree3D ft;
 	PerspectiveCamera camera;
 	Model model;
 	ModelInstance instance;
-
+	MeshBuilder meshBuilder;
+	ModelBuilder modelBuilder;
 	@Override
 	public void create() {
 		sr = new ShapeRenderer();
-		ft = new FractalTree();
+		ft = new FractalTree3D();
 		modelBatch = new ModelBatch();
+		meshBuilder = new MeshBuilder();
 		camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(10f, 10f, 10f);
 		camera.lookAt(0,0,0);
 		camera.near = 1f;
 		camera.far = 300f;
 		camera.update();
-		ModelBuilder modelBuilder = new ModelBuilder();
+		modelBuilder = new ModelBuilder();
 		model = modelBuilder.createBox(5f, 5f, 5f,
 				new Material(ColorAttribute.createDiffuse(Color.GREEN)),
 				VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
@@ -51,9 +53,10 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		String tree = ft.setup(3);
 		modelBatch.begin(camera);
-		modelBatch.render(instance);
+		//modelBatch.render(instance);
+		modelBatch.render(ft.draw(tree, meshBuilder,modelBuilder));
 		modelBatch.end();
-		ft.draw(tree, sr);
+
 	}
 
 	@Override
